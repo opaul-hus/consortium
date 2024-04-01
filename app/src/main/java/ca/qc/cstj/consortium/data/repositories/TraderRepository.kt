@@ -26,7 +26,7 @@ class TraderRepository(private val context: Context) {
     }
 
     val settings = context.dataStore.data.map {
-        val name = it[PreferencesKeys.NAME] ?: ""
+        val traderName = it[PreferencesKeys.NAME] ?: "Olivier"
         val element1 = it[PreferencesKeys.ELEMENT_I] ?: 200f
         val element2 = it[PreferencesKeys.ELEMENT_SM] ?: 200f
         val element3 = it[PreferencesKeys.ELEMENT_JA] ?: 200f
@@ -34,7 +34,7 @@ class TraderRepository(private val context: Context) {
         val element5 = it[PreferencesKeys.ELEMENT_B] ?: 200f
 
         Trader(
-            name = name,
+            name = traderName,
             iaspyx = element1,
             smiathil = element2,
             jasmalt = element3,
@@ -45,10 +45,21 @@ class TraderRepository(private val context: Context) {
 
     }
 
+    suspend fun saveCargo(quantity1:Float,quantity2:Float,quantity3:Float,quantity4:Float,quantity5:Float){
+        context.dataStore.edit {
+            it[PreferencesKeys.ELEMENT_I]=quantity1
+            it[PreferencesKeys.ELEMENT_SM]=quantity2
+            it[PreferencesKeys.ELEMENT_JA]=quantity3
+            it[PreferencesKeys.ELEMENT_VE]=quantity4
+            it[PreferencesKeys.ELEMENT_B]=quantity5
+        }
+    }
+
     suspend fun <T> save(key: Preferences.Key<T>, value: T) {
         context.dataStore.edit {
             it[key] = value
         }
+
 
 
     }

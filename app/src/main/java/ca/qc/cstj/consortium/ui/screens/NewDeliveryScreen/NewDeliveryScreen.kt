@@ -3,15 +3,32 @@
 package ca.qc.cstj.consortium.ui.screens.NewDeliveryScreen
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import ca.qc.cstj.consortium.ui.theme.ConsortiumTheme
+import ca.qc.cstj.consortium.R
+import ca.qc.cstj.consortium.core.Constants
+import ca.qc.cstj.consortium.ui.composables.InventoryItemCard
+import ca.qc.cstj.consortium.ui.navigation.Screen
 
 
 @Composable
@@ -33,67 +50,51 @@ fun NewDeliveryScreen(
                 }
                 NewDeliveryScreenViewModel.ScreenEvent.DeliverySaved -> {
                     navController.popBackStack()
-                    Toast.makeText(context, "Note saved", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Delivery saved", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                ),
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { navController.navigate(Screen.Settings.route) }) {
-                        Icon(
-                            imageVector = Icons.Filled.Settings,
-                            contentDescription = "Settings"
-                        )
-                    }
-                }
-            )
-        },
-        floatingActionButton = {
-            if(!uiState.value.isError) {
-                FloatingActionButton(onClick = {
-                    viewModel.save()
-                }) {
-                    Icon(Icons.Filled.Save, contentDescription = Icons.Filled.Add.name)
-                }
-            }
+Scaffold (modifier = Modifier
+    .fillMaxHeight()
+    .padding(8.dp)
+    .fillMaxWidth()
+    .padding(top = 20.dp),
+    floatingActionButton = {
+        FloatingActionButton(onClick = {
+            viewModel.save()
+            navController.navigate(Screen.Deliveries.route)
+            }) {
+            Icon(Icons.Filled.Save, contentDescription = "Add")
         }
-    ) { innerPaddings ->
-        AddScreenContent(
-            note = uiState.value.note,
-            isError = uiState.value.isError,
-            onUpdateTitle = { newTitle -> viewModel.updateTitle(newTitle) },
-            onUpdateContent = { viewModel.updateContent(it) },
-            onUpdateColor = { viewModel.updateColor(it) },
-            modifier = Modifier.padding(innerPaddings),
-        )
     }
+
+            ) {
+        innerPadding ->
+    Column (   modifier = Modifier
+        .padding(innerPadding),
+        verticalArrangement = Arrangement.spacedBy(16.dp),){
+        Text(text = "Delivery", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center,modifier = Modifier.align(alignment =Alignment.CenterHorizontally))
+        InventoryItemCard(element= Constants.ELEMENTS[0],slider=uiState.value.slider1, quantity = uiState.value.trader.iaspyx, symbol = R.drawable.i, viewModel = viewModel)
+        InventoryItemCard(element=Constants.ELEMENTS[1],slider=uiState.value.slider2, quantity = uiState.value.trader.smiathil, symbol = R.drawable.sm, viewModel = viewModel)
+        InventoryItemCard(element=Constants.ELEMENTS[2],slider=uiState.value.slider3, quantity = uiState.value.trader.jasmalt, symbol = R.drawable.ja, viewModel = viewModel)
+        InventoryItemCard(element=Constants.ELEMENTS[3], slider=uiState.value.slider4,quantity = uiState.value.trader.vethyx, symbol = R.drawable.ve, viewModel = viewModel)
+        InventoryItemCard(element=Constants.ELEMENTS[4],slider=uiState.value.slider5, quantity = uiState.value.trader.blierium, symbol = R.drawable.b, viewModel = viewModel)
+
+    }
+
+
 }
 
-
-
-
-
-@Preview
-@Composable
-fun NewDelScreenPreview(){
-    ConsortiumTheme {
-        NewDeliveryScreen(rememberNavController())
     }
-}
+
+
+
+
+
+
+
+
 
 
