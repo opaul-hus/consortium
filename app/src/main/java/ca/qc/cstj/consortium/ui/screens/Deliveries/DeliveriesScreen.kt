@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -56,8 +55,9 @@ fun DeliveriesScreen(
 
 
             Text(text = "Welcome Back ${uiState.value.trader.name}",
-                style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
+
             LazyColumn (modifier = Modifier.padding(top = 16.dp)){
             items(uiState.value.deliveries){item ->
                 DeliveryItemCard(del = item)

@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ca.qc.cstj.consortium.ui.screens.Deliveries.DeliveriesScreen
+import ca.qc.cstj.consortium.ui.screens.Home.HomeScreen
 import ca.qc.cstj.consortium.ui.screens.NewDeliveryScreen.NewDeliveryScreen
 
 
@@ -13,10 +14,10 @@ fun AppNavHost(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Deliveries.route
+        startDestination = Screen.Home.route
     ) {
         composable(Screen.Home.route) {
-
+        HomeScreen(navController = navController)
         }
         composable(Screen.NewDelivery.route) {
         NewDeliveryScreen(navController = navController)

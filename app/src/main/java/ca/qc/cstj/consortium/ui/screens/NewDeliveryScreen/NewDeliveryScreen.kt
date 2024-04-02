@@ -20,7 +20,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -75,12 +74,14 @@ Scaffold (modifier = Modifier
     Column (   modifier = Modifier
         .padding(innerPadding),
         verticalArrangement = Arrangement.spacedBy(16.dp),){
-        Text(text = "Delivery", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center,modifier = Modifier.align(alignment =Alignment.CenterHorizontally))
-        InventoryItemCard(element= Constants.ELEMENTS[0],slider=uiState.value.slider1, quantity = uiState.value.trader.iaspyx, symbol = R.drawable.i, viewModel = viewModel)
-        InventoryItemCard(element=Constants.ELEMENTS[1],slider=uiState.value.slider2, quantity = uiState.value.trader.smiathil, symbol = R.drawable.sm, viewModel = viewModel)
-        InventoryItemCard(element=Constants.ELEMENTS[2],slider=uiState.value.slider3, quantity = uiState.value.trader.jasmalt, symbol = R.drawable.ja, viewModel = viewModel)
-        InventoryItemCard(element=Constants.ELEMENTS[3], slider=uiState.value.slider4,quantity = uiState.value.trader.vethyx, symbol = R.drawable.ve, viewModel = viewModel)
-        InventoryItemCard(element=Constants.ELEMENTS[4],slider=uiState.value.slider5, quantity = uiState.value.trader.blierium, symbol = R.drawable.b, viewModel = viewModel)
+        Text(text = "Delivery", style = MaterialTheme.typography.titleLarge,modifier = Modifier.align(alignment =Alignment.CenterHorizontally))
+        InventoryItemCard(
+            element = Constants.ELEMENTS[0],
+            slider =uiState.value.slider1, quantity = uiState.value.trader.iaspyx, symbol = R.drawable.i, update = {viewModel.update("element",0f)})
+        InventoryItemCard(element=Constants.ELEMENTS[1],slider=uiState.value.slider2, quantity = uiState.value.trader.smiathil, symbol = R.drawable.sm, update = {viewModel.update("",0f)})
+        InventoryItemCard(element=Constants.ELEMENTS[2],slider=uiState.value.slider3, quantity = uiState.value.trader.jasmalt, symbol = R.drawable.ja, update = {viewModel.update("",0f)})
+        InventoryItemCard(element=Constants.ELEMENTS[3], slider=uiState.value.slider4,quantity = uiState.value.trader.vethyx, symbol = R.drawable.ve, update = {viewModel.update("",0f)})
+        InventoryItemCard(element=Constants.ELEMENTS[4],slider=uiState.value.slider5, quantity = uiState.value.trader.blierium, symbol = R.drawable.b, update = {viewModel.update("",0f)})
 
     }
 
