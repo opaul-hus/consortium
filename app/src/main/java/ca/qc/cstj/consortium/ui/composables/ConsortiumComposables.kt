@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -121,8 +122,7 @@ fun TraderInventory(trader:Trader){
 
     ){  Column (modifier=Modifier.fillMaxWidth()){
         Row (modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.CenterHorizontally)
+            .fillMaxWidth().align(Alignment.CenterHorizontally).wrapContentHeight(Alignment.CenterVertically)
 
             .padding(start = 8.dp, end = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             Column (modifier = Modifier.align(Alignment.CenterVertically)) {

@@ -33,7 +33,7 @@ class TraderRepository(private val context: Context) {
         val element4 = it[PreferencesKeys.ELEMENT_VE] ?: 200f
         val element5 = it[PreferencesKeys.ELEMENT_B] ?: 200f
 
-        Trader(
+       Trader(
             name = traderName,
             iaspyx = element1,
             smiathil = element2,

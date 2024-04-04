@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -45,11 +46,13 @@ fun NewDeliveryScreen(
         viewModel.eventsFlow.collect { event ->
             when(event) {
                 is NewDeliveryScreenViewModel.ScreenEvent.DeliveryCannotBeSaved -> {
-                    Toast.makeText(context, event.ex.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        context.getString(R.string.invalid_quantities), Toast.LENGTH_LONG).show()
                 }
                 NewDeliveryScreenViewModel.ScreenEvent.DeliverySaved -> {
                     navController.popBackStack()
-                    Toast.makeText(context, "Delivery saved", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        context.getString(R.string.delivery_saved), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -65,7 +68,7 @@ Scaffold (modifier = Modifier
             viewModel.save()
             navController.navigate(Screen.Deliveries.route)
             }) {
-            Icon(Icons.Filled.Save, contentDescription = "Add")
+            Icon(Icons.Filled.Save, contentDescription = stringResource(R.string.add))
         }
     }
 
@@ -74,14 +77,14 @@ Scaffold (modifier = Modifier
     Column (   modifier = Modifier
         .padding(innerPadding),
         verticalArrangement = Arrangement.spacedBy(16.dp),){
-        Text(text = "Delivery", style = MaterialTheme.typography.titleLarge,modifier = Modifier.align(alignment =Alignment.CenterHorizontally))
+        Text(text = stringResource(R.string.delivery), style = MaterialTheme.typography.titleLarge,modifier = Modifier.align(alignment =Alignment.CenterHorizontally))
         InventoryItemCard(
             element = Constants.ELEMENTS[0],
-            slider =uiState.value.slider1, quantity = uiState.value.trader.iaspyx, symbol = R.drawable.i, update = {viewModel.update("element",0f)})
-        InventoryItemCard(element=Constants.ELEMENTS[1],slider=uiState.value.slider2, quantity = uiState.value.trader.smiathil, symbol = R.drawable.sm, update = {viewModel.update("",0f)})
-        InventoryItemCard(element=Constants.ELEMENTS[2],slider=uiState.value.slider3, quantity = uiState.value.trader.jasmalt, symbol = R.drawable.ja, update = {viewModel.update("",0f)})
-        InventoryItemCard(element=Constants.ELEMENTS[3], slider=uiState.value.slider4,quantity = uiState.value.trader.vethyx, symbol = R.drawable.ve, update = {viewModel.update("",0f)})
-        InventoryItemCard(element=Constants.ELEMENTS[4],slider=uiState.value.slider5, quantity = uiState.value.trader.blierium, symbol = R.drawable.b, update = {viewModel.update("",0f)})
+            slider =uiState.value.slider1, quantity = uiState.value.trader.iaspyx, symbol = R.drawable.i, update = {element,value -> viewModel.update(element,value)})
+        InventoryItemCard(element=Constants.ELEMENTS[1],slider=uiState.value.slider2, quantity = uiState.value.trader.smiathil, symbol = R.drawable.sm, update = {element,value -> viewModel.update(element,value)})
+        InventoryItemCard(element=Constants.ELEMENTS[2],slider=uiState.value.slider3, quantity = uiState.value.trader.jasmalt, symbol = R.drawable.ja, update = {element,value -> viewModel.update(element,value)})
+        InventoryItemCard(element=Constants.ELEMENTS[3], slider=uiState.value.slider4,quantity = uiState.value.trader.vethyx, symbol = R.drawable.ve, update = {element,value -> viewModel.update(element,value)})
+        InventoryItemCard(element=Constants.ELEMENTS[4],slider=uiState.value.slider5, quantity = uiState.value.trader.blierium, symbol = R.drawable.b, update = {element,value -> viewModel.update(element,value)})
 
     }
 

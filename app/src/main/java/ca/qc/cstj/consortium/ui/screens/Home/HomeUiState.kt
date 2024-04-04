@@ -7,4 +7,5 @@ data class HomeUiState (
     val deliveries: List<Delivery> = listOf(),
     val trader: Trader = Trader(),
     val isError: Boolean = true,
+    val traderNameField: String=""
 )

@@ -16,10 +16,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import ca.qc.cstj.consortium.R
 import ca.qc.cstj.consortium.ui.composables.DeliveryItemCard
 import ca.qc.cstj.consortium.ui.navigation.Screen
 
@@ -41,7 +43,7 @@ fun DeliveriesScreen(
 
                 navController.navigate(Screen.NewDelivery.route)
             }) {
-                Icon(Icons.Filled.Add, contentDescription = "Add")
+                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add))
             }
         }
 
@@ -49,12 +51,13 @@ fun DeliveriesScreen(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
+
         )
 
         {
 
 
-            Text(text = "Welcome Back ${uiState.value.trader.name}",
+            Text(text = stringResource(R.string.welcome_back)+ " ${uiState.value.trader.name}",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
 

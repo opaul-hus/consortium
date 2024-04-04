@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Consortium</string>
+    <string name="welcome_back">Bon Retour</string>
+    <string name="add">Ajouter</string>
+    <string name="delivery">Livraison</string>
+    <string name="delivery_saved">Livraison Sauvegardée</string>
+    <string name="invalid_quantities">Quantites Invalides</string>
+    <string name="trader_name">Nom du Commercant</string>
+    <string name="error_please_enter_name">Erreur Entrez Un Nom SVP</string>
+    <string name="open">Ouvrir</string>
+    <string name="load">Charger</string>
+    <string name="upload">" Téléverser"</string>
 </resources>

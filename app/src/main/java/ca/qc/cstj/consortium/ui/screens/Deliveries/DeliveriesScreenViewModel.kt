@@ -27,7 +27,8 @@ class DeliveriesScreenViewModel(application: Application) : AndroidViewModel(app
                 }
 
             }
-
+        }
+        viewModelScope.launch(){
             traderRepository.settings.collect { settings ->
                 val name = settings.name
                 val element1 = settings.iaspyx
