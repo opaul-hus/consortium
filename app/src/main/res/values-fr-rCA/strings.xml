@@ -11,4 +11,5 @@
     <string name="open">Ouvrir</string>
     <string name="load">Charger</string>
     <string name="upload">" Téléverser"</string>
+    <string name="account_image">Image Profile</string>
 </resources>
